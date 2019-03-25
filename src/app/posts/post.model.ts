@@ -1,4 +1,4 @@
 export interface Post {
-  title: String;
-  content: String;
+  title: string;
+  content: string;
 }

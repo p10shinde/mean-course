@@ -1,0 +1,14 @@
+/* 1 */
+{
+    "_id" : ObjectId("5c98fd8d9074fe60088ec769"),
+    "title" : "My First post title",
+    "content" : "My first post content"
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5c9907c29074fe60088ec76a"),
+    "title" : "My First post title2",
+    "__v" : 0,
+    "content" : "My first post content2"
+}
