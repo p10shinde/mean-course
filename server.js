@@ -18,7 +18,7 @@ app.use(function(req, res, next){
   res.setHeader('Access-Control-Allow-Origin','http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials',true);
+  // res.setHeader('Access-Control-Allow-Credentials',true);
   next();
 })
 
@@ -52,18 +52,21 @@ app.post('/api/addpost', function(req, res){
   try{
     model.findOneAndUpdate({title: req.body.title}, {$set:{content:req.body.content}}, { upsert: true, new: true, setDefaultsOnInsert: true }, (err, doc) => {
       if (err) { errHandler(res, _E); }
-      res.send('Post Updated!!!');
+      res.send({msg:'Post Updated!!!'});
     });
   }catch(_E){
     errHandler(res, _E);
   }
 })
 
-app.delete('/api/deletepost', function(req, res) {
+app.delete('/api/deletepost/:title', function(req, res) {
   try{
-    model.findOneAndDelete({title: req.body.title}, (err, doc) => {
+    model.findOneAndDelete({title: req.params.title}, (err, doc) => {
       if (err) { errHandler(res, _E); }
-      res.send('Post Deleted!!!');
+      if(doc !== null)
+        res.send({msg: 'Post Deleted!!!'});
+      else
+        res.send({msg: 'Post Not Found!!!'});
     });
   }catch(_E){
     errHandler(res, _E);
